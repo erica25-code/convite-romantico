@@ -14,32 +14,54 @@
         }
 
         body {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #ffdde2;
+            background: #ffdde2;
             font-family: Arial, sans-serif;
             overflow: hidden;
         }
 
+        /* Corações animados */
         .coracao {
-            position: absolute;
+            position: fixed;
+            bottom: -50px;
             color: #f48ba4;
-            font-size: 22px;
-            animation: flutuar 3s infinite alternate;
+            font-size: 25px;
+            animation: subir linear infinite;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .c1 { top: 15%; left: 18%; }
-        .c2 { top: 40%; right: 18%; }
-        .c3 { bottom: 20%; left: 25%; }
-        .c4 { bottom: 25%; right: 12%; }
+        @keyframes subir {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
 
-        @keyframes flutuar {
-            from { transform: translateY(0); }
-            to { transform: translateY(-15px); }
+            20% {
+                opacity: 0.9;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
+        .c1 { left: 5%; animation-duration: 7s; }
+        .c2 { left: 15%; animation-duration: 9s; animation-delay: 2s; }
+        .c3 { left: 25%; animation-duration: 6s; animation-delay: 1s; }
+        .c4 { left: 35%; animation-duration: 8s; animation-delay: 3s; }
+        .c5 { left: 45%; animation-duration: 7s; animation-delay: 4s; }
+        .c6 { left: 55%; animation-duration: 10s; animation-delay: 1s; }
+        .c7 { left: 65%; animation-duration: 6s; animation-delay: 2s; }
+        .c8 { left: 75%; animation-duration: 9s; animation-delay: 3s; }
+        .c9 { left: 85%; animation-duration: 7s; animation-delay: 1s; }
+        .c10 { left: 95%; animation-duration: 8s; animation-delay: 4s; }
+
+        /* Cartão principal */
         .cartao {
             background: white;
             width: 90%;
@@ -61,8 +83,8 @@
         .botoes {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 20px;
-            flex-wrap: wrap;
         }
 
         button {
@@ -73,11 +95,11 @@
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.2s;
         }
 
         #sim {
-            background-color: #4caf50;
+            background: #4caf50;
+            transition: transform 0.2s;
         }
 
         #sim:hover {
@@ -85,14 +107,15 @@
         }
 
         #nao {
-            background-color: #f44336;
+            background: #f44336;
         }
 
         #mensagem {
             color: #e8175d;
-            font-size: 20px;
+            font-size: 19px;
             margin-top: 25px;
             font-weight: bold;
+            line-height: 1.5;
         }
 
     </style>
@@ -100,23 +123,32 @@
 
 <body>
 
+    <!-- Corações flutuando -->
     <div class="coracao c1">♥</div>
     <div class="coracao c2">♥</div>
     <div class="coracao c3">♥</div>
     <div class="coracao c4">♥</div>
+    <div class="coracao c5">♥</div>
+    <div class="coracao c6">♥</div>
+    <div class="coracao c7">♥</div>
+    <div class="coracao c8">♥</div>
+    <div class="coracao c9">♥</div>
+    <div class="coracao c10">♥</div>
 
     <div class="cartao">
 
-        <h1>Quer sair comigo? ❤️</h1>
+        <h1 id="titulo">Quer sair comigo? ❤️</h1>
 
         <div class="botoes">
+
             <button id="sim" onclick="aceitou()">
                 Sim
             </button>
 
-            <button id="nao" onclick="recusou()">
+            <button id="nao" type="button">
                 Não
             </button>
+
         </div>
 
         <p id="mensagem"></p>
@@ -125,17 +157,47 @@
 
     <script>
 
+        // Botão Sim
         function aceitou() {
+
+            document.getElementById("titulo").innerHTML =
+                "Aeee! Sabia que você ia aceitar! ❤️";
+
+            document.querySelector(".botoes").style.display =
+                "none";
+
             document.getElementById("mensagem").innerHTML =
-                "Aaaah! ❤️ Já estou feliz! Agora vamos combinar nosso encontro! 🥰";
+                "Agora só falta escolhermos o dia do nosso encontro! 🥰💕";
+
         }
 
-        function recusou() {
-            document.getElementById("mensagem").innerHTML =
-                "Tudo bem! ❤️ Obrigada por responder!";
+        // Botão Não fujão
+        const botaoNao = document.getElementById("nao");
+
+        function fugir() {
+
+            const largura = botaoNao.offsetWidth;
+            const altura = botaoNao.offsetHeight;
+
+            const maxX = window.innerWidth - largura - 15;
+            const maxY = window.innerHeight - altura - 15;
+
+            const x = Math.random() * Math.max(0, maxX);
+            const y = Math.random() * Math.max(0, maxY);
+
+            botaoNao.style.position = "fixed";
+            botaoNao.style.left = x + "px";
+            botaoNao.style.top = y + "px";
+            botaoNao.style.zIndex = "10";
+
         }
+
+        botaoNao.addEventListener("pointerenter", fugir);
+
+        botaoNao.addEventListener("click", fugir);
 
     </script>
 
 </body>
 </html>
+
