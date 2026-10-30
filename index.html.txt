@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Um convite especial ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffdde2;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .coracao {
+            position: absolute;
+            color: #f48ba4;
+            font-size: 22px;
+            animation: flutuar 3s infinite alternate;
+        }
+
+        .c1 { top: 15%; left: 18%; }
+        .c2 { top: 40%; right: 18%; }
+        .c3 { bottom: 20%; left: 25%; }
+        .c4 { bottom: 25%; right: 12%; }
+
+        @keyframes flutuar {
+            from { transform: translateY(0); }
+            to { transform: translateY(-15px); }
+        }
+
+        .cartao {
+            background: white;
+            width: 90%;
+            max-width: 450px;
+            min-height: 260px;
+            padding: 55px 25px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            z-index: 1;
+        }
+
+        h1 {
+            color: #e8175d;
+            font-size: 30px;
+            margin-bottom: 38px;
+        }
+
+        .botoes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            padding: 18px 32px;
+            border-radius: 25px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #sim {
+            background-color: #4caf50;
+        }
+
+        #sim:hover {
+            transform: scale(1.1);
+        }
+
+        #nao {
+            background-color: #f44336;
+        }
+
+        #mensagem {
+            color: #e8175d;
+            font-size: 20px;
+            margin-top: 25px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="coracao c1">♥</div>
+    <div class="coracao c2">♥</div>
+    <div class="coracao c3">♥</div>
+    <div class="coracao c4">♥</div>
+
+    <div class="cartao">
+
+        <h1>Quer sair comigo? ❤️</h1>
+
+        <div class="botoes">
+            <button id="sim" onclick="aceitou()">
+                Sim
+            </button>
+
+            <button id="nao" onclick="recusou()">
+                Não
+            </button>
+        </div>
+
+        <p id="mensagem"></p>
+
+    </div>
+
+    <script>
+
+        function aceitou() {
+            document.getElementById("mensagem").innerHTML =
+                "Aaaah! ❤️ Já estou feliz! Agora vamos combinar nosso encontro! 🥰";
+        }
+
+        function recusou() {
+            document.getElementById("mensagem").innerHTML =
+                "Tudo bem! ❤️ Obrigada por responder!";
+        }
+
+    </script>
+
+</body>
+</html>
